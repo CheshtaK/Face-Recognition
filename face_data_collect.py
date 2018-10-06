@@ -21,6 +21,9 @@ while True:
 		continue
 
 	faces = face_cascade.detectMultiScale(frame,1.3,5)
+	if len(faces)==0:
+		continue
+
 	faces = sorted(faces, key=lambda f:f[2]*f[3])
 
 	##Pick the last face (because it is the largest face according to area)
@@ -56,4 +59,4 @@ np.save(dataset_path+file_name+'.npy',face_data)
 print("Data successfully saved at "+dataset_path+file_name+'.npy')
 
 cap.release()
-cap.destroyAllWindows()
+cv2.destroyAllWindows()
